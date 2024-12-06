@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Flip Photo with Video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: pink;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .flip-container {
+      perspective: 1000px;
+    }
+
+    .flipper {
+      width: 300px;
+      height: 400px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+
+    .front, .back {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      backface-visibility: hidden;
+    }
+
+    .front {
+      background: #fff;
+    }
+
+    .back {
+      background: #ffefcc;
+      transform: rotateY(180deg);
+    }
+
+    .front img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .back video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .next-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .next-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h5>Click On Pic!!</h5>
+  <div class="flip-container" onclick="toggleFlip(this)">
+    <div class="flipper">
+      <!-- Front Side -->
+      <div class="front">
+        <img src="pic1.jpg" alt="Front Photo">
+      </div>
+      <!-- Back Side -->
+      <div class="back">
+        <video id="backVideo" src="video.mp4" muted></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Next Button -->
+  <button class="next-button" onclick="goToNextPage()">Next</button>
+
+  <script>
+    function toggleFlip(element) {
+      const flipper = element.querySelector(".flipper");
+      const video = document.getElementById("backVideo");
+
+      if (flipper.style.transform === "rotateY(180deg)") {
+        flipper.style.transform = "rotateY(0deg)";
+        video.pause(); // वीडियो को रोकना
+      } else {
+        flipper.style.transform = "rotateY(180deg)";
+        video.play(); // वीडियो शुरू करना
+      }
+    }
+
+    function goToNextPage() {
+      window.location.href = "three.html";
+    }
+  </script>
+</body>
+</html>
